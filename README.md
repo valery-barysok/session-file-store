@@ -17,6 +17,7 @@ Session file store is a provision for storing session data in the session file
   - `factor`     Defaults to 1
   - `minTimeout` Defaults to 50
   - `maxTimeout` Defaults to 50
+  - `reapInterval` Interval to clear expired sessions in seconds. Defaults to 1 hour
 
 ## Usage
 
