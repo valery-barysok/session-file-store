@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "0.12"
+  - "0.10"
+  - "iojs"
+  - "iojs-v1.0"
+sudo: false
+git:
+  depth: 10
+branches:
+  only:
+    - master
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/fab5eca4f3c5e9a75e6c
+    on_success: change
+    on_failure: always
+script: "npm run-script test-ci"
+after_script: "npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls"
