@@ -14,7 +14,7 @@ notifications:
   webhooks:
     urls:
       - https://webhooks.gitter.im/e/8d6479e9fd8c597403fe
-    on_success: change
+    on_success: always
     on_failure: always
 script: "npm run-script test-ci"
 after_script: "npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls"
