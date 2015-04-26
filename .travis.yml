@@ -13,7 +13,7 @@ branches:
 notifications:
   webhooks:
     urls:
-      - https://webhooks.gitter.im/e/fab5eca4f3c5e9a75e6c
+      - https://webhooks.gitter.im/e/8d6479e9fd8c597403fe
     on_success: change
     on_failure: always
 script: "npm run-script test-ci"
