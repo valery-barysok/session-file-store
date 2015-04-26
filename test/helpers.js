@@ -20,7 +20,7 @@ describe("helpers", function () {
     it("should return session file path when base path and session id are passed", function () {
       var sessionPath = helpers.sessionPath(options.path, "id");
       expect(sessionPath).to.be.a("string");
-      expect(sessionPath).is.equal("test\\sessions\\id.json");
+      expect(sessionPath).is.equal(path.normalize("test/sessions/id.json"));
     });
   });
 });
