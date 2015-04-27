@@ -22,13 +22,14 @@ Session file store is a provision for storing session data in the session file
 
 ## Options
 
-    - `path`       The directory where the session files will be stored. Defaults to `./sessions`
-    - `ttl`        Time to live in seconds. Defaults to 3600
-    - `retries`    The number of retries to get session data from a session file. Defaults to 5
-    - `factor`     Defaults to 1
-    - `minTimeout` Defaults to 50
-    - `maxTimeout` Defaults to 100
-    - `reapInterval` Interval to clear expired sessions in seconds. Defaults to 1 hour
+  - `path`         The directory where the session files will be stored. Defaults to `./sessions`
+  - `ttl`          Time to live in seconds. Defaults to 3600
+  - `retries`      The number of retries to get session data from a session file. Defaults to 5
+  - `factor`       Defaults to 1
+  - `minTimeout`   Defaults to 50
+  - `maxTimeout`   Defaults to 100
+  - `reapInterval` Interval to clear expired sessions in seconds or -1 if do not need. Defaults to 1 hour
+  - `reapWorker`   If need to do clearing of expired sessions in a distinct worker process. Defaults to true
 
 ## Usage
 
