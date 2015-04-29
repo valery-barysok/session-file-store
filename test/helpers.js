@@ -1,6 +1,7 @@
 var helpers = require('../lib/session-file-helpers'),
   chai = require('chai'),
   expect = chai.expect,
+  fs = require('graceful-fs'),
   path = require('path');
 
 describe('helpers', function () {
@@ -37,19 +38,69 @@ describe('helpers', function () {
   describe('#sessionPath', function () {
     it('should return session file path when base path and session id are passed', function () {
       var sessionPath = helpers.sessionPath(options.path, 'id');
-      expect(sessionPath).to.be.a('string');
-      expect(sessionPath).is.equal(path.normalize('sessions/id.json'));
+      expect(sessionPath).to.be.a('string')
+        .and.is.equal(path.normalize('sessions/id.json'));
     });
   });
 
   describe('#length', function () {
 
-    it('should throw exception when no folder exists', function (done) {
-      helpers.length(options, function (err, result) {
-        expect(err).to.be.ok;
-        expect(err).is.an('object');
-        expect(err).to.have.property('code').is.equal('ENOENT');
-        done();
+    describe('no destination folder exists', function () {
+
+      it('should failed when no folder exists', function (done) {
+        helpers.length(options, function (err, result) {
+          expect(err)
+            .to.be.ok
+            .and.is.an('object')
+            .and.have.property('code', 'ENOENT');
+          done();
+        });
+      });
+    });
+
+    describe('destination folder is empty', function () {
+
+      before(function () {
+        fs.mkdirSync(options.path);
+      });
+
+      after(function () {
+        fs.rmdirSync(options.path);
+      });
+
+      it('should return 0 when empty folder exists', function (done) {
+        helpers.length(options, function (err, result) {
+          expect(err).to.not.exist;
+          expect(result).to.equal(0);
+          done();
+        });
+      });
+    });
+
+    describe('destination folder has some files', function () {
+
+      before(function () {
+        fs.mkdirSync(options.path);
+
+        fs.closeSync(fs.openSync(path.join(options.path, '1.json'), 'w'));
+        fs.closeSync(fs.openSync(path.join(options.path, '2.json'), 'w'));
+        fs.closeSync(fs.openSync(path.join(options.path, '3.notjson'), 'w'));
+      });
+
+      after(function () {
+        fs.unlinkSync(path.join(options.path, '1.json'));
+        fs.unlinkSync(path.join(options.path, '2.json'));
+        fs.unlinkSync(path.join(options.path, '3.notjson'));
+
+        fs.rmdirSync(options.path);
+      });
+
+      it('should return count of files match to file pattern', function (done) {
+        helpers.length(options, function (err, result) {
+          expect(err).to.not.exist;
+          expect(result).to.equal(2);
+          done();
+        });
       });
     });
   });
