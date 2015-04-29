@@ -46,7 +46,7 @@ describe('helpers', function () {
 
     describe('no destination folder exists', function () {
       var options = helpers.defaults({
-        path: path.normalize('fixtures/sessions_no_exists')
+        path: path.normalize('test/fixtures/sessions_no_exists')
       });
 
       it('should failed when no folder exists', function (done) {
@@ -62,7 +62,7 @@ describe('helpers', function () {
 
     describe('destination folder is empty', function () {
       var options = helpers.defaults({
-        path: path.normalize('fixtures/empty_sessions')
+        path: path.normalize('test/fixtures/empty_sessions')
       });
 
       before(function () {
@@ -84,7 +84,7 @@ describe('helpers', function () {
 
     describe('destination folder has some session files', function () {
       var options = helpers.defaults({
-        path: path.normalize('fixtures/sessions')
+        path: path.normalize('test/fixtures/sessions')
       });
 
       it('should return count of session files match to file pattern', function (done) {
@@ -101,7 +101,7 @@ describe('helpers', function () {
 
     describe('no destination folder exists', function () {
       var options = helpers.defaults({
-        path: path.normalize('fixtures/sessions_no_exists')
+        path: path.normalize('test/fixtures/sessions_no_exists')
       });
 
       it('should failed when no folder exists', function (done) {
@@ -117,7 +117,7 @@ describe('helpers', function () {
 
     describe('destination folder is empty', function () {
       var options = helpers.defaults({
-        path: path.normalize('fixtures/empty_sessions')
+        path: path.normalize('test/fixtures/empty_sessions')
       });
 
       before(function () {
@@ -139,7 +139,7 @@ describe('helpers', function () {
 
     describe('destination folder has some session files', function () {
       var options = helpers.defaults({
-        path: path.normalize('fixtures/sessions')
+        path: path.normalize('test/fixtures/sessions')
       });
 
       it('should return session files match to file pattern', function (done) {
