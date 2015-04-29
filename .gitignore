@@ -2,7 +2,6 @@
 # npm
 ############################
 node_modules
-coverage
 npm-debug.log
 
 
@@ -25,3 +24,5 @@ nbproject
 # Other
 ############################
 .node_history
+coverage
+sessions

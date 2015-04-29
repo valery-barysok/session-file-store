@@ -5,7 +5,6 @@ var helpers = require('../lib/session-file-helpers'),
   path = require('path');
 
 describe('helpers', function () {
-  var options = helpers.defaults();
 
   describe('#defaults', function () {
     it('should return valid defaults', function () {
@@ -19,7 +18,7 @@ describe('helpers', function () {
       expect(options).to.have.property('maxTimeout').that.be.a('number').and.least(options.minTimeout);
       expect(options).to.have.property('filePattern').that.is.instanceOf(RegExp);
       expect(options).to.have.property('reapInterval').that.be.a('number');
-      expect(options).to.have.property('reapWorker').that.be.a('boolean');
+      expect(options).to.have.property('reapAsync').that.be.a('boolean');
     });
   });
 
@@ -37,7 +36,7 @@ describe('helpers', function () {
 
   describe('#sessionPath', function () {
     it('should return session file path when base path and session id are passed', function () {
-      var sessionPath = helpers.sessionPath(options.path, 'id');
+      var sessionPath = helpers.sessionPath(helpers.defaults().path, 'id');
       expect(sessionPath).to.be.a('string')
         .and.is.equal(path.normalize('sessions/id.json'));
     });
@@ -46,6 +45,9 @@ describe('helpers', function () {
   describe('#length', function () {
 
     describe('no destination folder exists', function () {
+      var options = helpers.defaults({
+        path: path.normalize('fixtures/sessions_no_exists')
+      });
 
       it('should failed when no folder exists', function (done) {
         helpers.length(options, function (err, result) {
@@ -59,13 +61,8 @@ describe('helpers', function () {
     });
 
     describe('destination folder is empty', function () {
-
-      before(function () {
-        fs.mkdirSync(options.path);
-      });
-
-      after(function () {
-        fs.rmdirSync(options.path);
+      var options = helpers.defaults({
+        path: path.normalize('fixtures/empty_sessions')
       });
 
       it('should return 0 when empty folder exists', function (done) {
@@ -77,28 +74,62 @@ describe('helpers', function () {
       });
     });
 
-    describe('destination folder has some files', function () {
-
-      before(function () {
-        fs.mkdirSync(options.path);
-
-        fs.closeSync(fs.openSync(path.join(options.path, '1.json'), 'w'));
-        fs.closeSync(fs.openSync(path.join(options.path, '2.json'), 'w'));
-        fs.closeSync(fs.openSync(path.join(options.path, '3.notjson'), 'w'));
+    describe('destination folder has some session files', function () {
+      var options = helpers.defaults({
+        path: path.normalize('fixtures/sessions')
       });
 
-      after(function () {
-        fs.unlinkSync(path.join(options.path, '1.json'));
-        fs.unlinkSync(path.join(options.path, '2.json'));
-        fs.unlinkSync(path.join(options.path, '3.notjson'));
-
-        fs.rmdirSync(options.path);
-      });
-
-      it('should return count of files match to file pattern', function (done) {
+      it('should return count of session files match to file pattern', function (done) {
         helpers.length(options, function (err, result) {
           expect(err).to.not.exist;
           expect(result).to.equal(2);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('#list', function () {
+
+    describe('no destination folder exists', function () {
+      var options = helpers.defaults({
+        path: path.normalize('fixtures/sessions_no_exists')
+      });
+
+      it('should failed when no folder exists', function (done) {
+        helpers.list(options, function (err, result) {
+          expect(err)
+            .to.be.ok
+            .and.is.an('object')
+            .and.have.property('code', 'ENOENT');
+          done();
+        });
+      });
+    });
+
+    describe('destination folder is empty', function () {
+      var options = helpers.defaults({
+        path: path.normalize('fixtures/empty_sessions')
+      });
+
+      it('should return empty list when empty folder exists', function (done) {
+        helpers.list(options, function (err, files) {
+          expect(err).to.not.exist;
+          expect(files).is.empty;
+          done();
+        });
+      });
+    });
+
+    describe('destination folder has some session files', function () {
+      var options = helpers.defaults({
+        path: path.normalize('fixtures/sessions')
+      });
+
+      it('should return session files match to file pattern', function (done) {
+        helpers.list(options, function (err, files) {
+          expect(err).to.not.exist;
+          expect(files).to.have.length(2);
           done();
         });
       });
