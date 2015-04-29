@@ -10,7 +10,7 @@
 
 Session file store is a provision for storing session data in the session file
 
-> Note: session-file-store only supports express `>= 4.0.0`
+> Note: session-file-store supports express `>= 4.0.0` and connect `>=1.4.0`
 
 ## Community
 
@@ -42,6 +42,10 @@ Due to express `>= 4` changes, we need to pass `express-session` to the function
         store: new FileStore(options),
         secret: 'keyboard cat'
     }));
+
+## Examples
+
+You can found basic work app examples for express and connect frameworks in example folder.
 
 [npm-version-image]: https://img.shields.io/npm/v/session-file-store.svg
 [npm-downloads-image]: https://img.shields.io/npm/dm/session-file-store.svg
