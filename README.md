@@ -29,7 +29,7 @@ Session file store is a provision for storing session data in the session file
   - `minTimeout`   Defaults to 50
   - `maxTimeout`   Defaults to 100
   - `reapInterval` Interval to clear expired sessions in seconds or -1 if do not need. Defaults to 1 hour
-  - `reapWorker`   If need to do clearing of expired sessions in a distinct worker process. Defaults to true
+  - `reapAsync`    use distinct worker process for removing stale sessions. Defaults to true
 
 ## Usage
 
