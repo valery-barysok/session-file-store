@@ -65,6 +65,14 @@ describe('helpers', function () {
         path: path.normalize('fixtures/empty_sessions')
       });
 
+      before(function () {
+        fs.mkdirSync(options.path, '0755');
+      });
+
+      after(function () {
+        fs.rmdirSync(options.path, '0755');
+      });
+
       it('should return 0 when empty folder exists', function (done) {
         helpers.length(options, function (err, result) {
           expect(err).to.not.exist;
@@ -110,6 +118,14 @@ describe('helpers', function () {
     describe('destination folder is empty', function () {
       var options = helpers.defaults({
         path: path.normalize('fixtures/empty_sessions')
+      });
+
+      before(function () {
+        fs.mkdirSync(options.path, '0755');
+      });
+
+      after(function () {
+        fs.rmdirSync(options.path, '0755');
       });
 
       it('should return empty list when empty folder exists', function (done) {
