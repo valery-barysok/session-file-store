@@ -1,6 +1,6 @@
 {
   "name": "session-file-store",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Session file store is a provision for storing session data in the session file",
   "main": "index.js",
   "private": false,
@@ -11,7 +11,9 @@
   "keywords": [
     "session",
     "file",
-    "store"
+    "store",
+    "express",
+    "connect"
   ],
   "author": {
     "name": "Valery Barysok",
