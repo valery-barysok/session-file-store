@@ -60,6 +60,7 @@ describe('helpers', function () {
       expect(options).to.have.property('filePattern').that.is.instanceOf(RegExp);
       expect(options).to.have.property('reapInterval').that.be.a('number');
       expect(options).to.have.property('reapAsync').that.be.a('boolean');
+      expect(options).to.have.property('reapSyncFallback').that.be.a('boolean');
       expect(options).to.have.property('logFn').that.be.a('function');
       expect(options).to.have.property('fallbackSessionFn').that.be.a('undefined');
     });
@@ -316,6 +317,36 @@ describe('helpers', function () {
       helpers.expired(SESSION_ID, SESSIONS_OPTIONS, function (err, expired) {
         expect(err).to.not.exist;
         expect(expired).to.be.false;
+        done();
+      });
+    });
+  });
+
+  describe('#destroyIfExpired', function () {
+    var EXPIRED_SESSION_ID = 'expired_' + SESSION_ID;
+    var EXPIRED_SESSION_FILE = path.join(SESSIONS_OPTIONS.path, EXPIRED_SESSION_ID + '.json');
+    var expiredSession = clone(SESSION);
+    expiredSession.__lastAccess = 0;
+
+    var SESSION_FILE = path.join(SESSIONS_OPTIONS.path, SESSION_ID + '.json');
+    var session = clone(SESSION);
+    session.__lastAccess = new Date().getTime();
+
+    before(function (done) {
+      fs.emptyDir(SESSIONS_OPTIONS.path, function () {
+        fs.writeJson(EXPIRED_SESSION_FILE, expiredSession, function () {
+          fs.writeJson(SESSION_FILE, session, done);
+        });
+      });
+    });
+
+    after(function (done) {
+      fs.remove(SESSIONS_OPTIONS.path, done);
+    });
+
+    it('should be succeed', function (done) {
+      helpers.destroyIfExpired(SESSION_ID, SESSIONS_OPTIONS, function (err) {
+        expect(err).to.not.exist;
         done();
       });
     });

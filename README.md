@@ -30,6 +30,7 @@ Session file store is a provision for storing session data in the session file
   - `maxTimeout`        Defaults to 100
   - `reapInterval`      Interval to clear expired sessions in seconds or -1 if do not need. Defaults to 1 hour
   - `reapAsync`         use distinct worker process for removing stale sessions. Defaults to true
+  - `reapSyncFallback`  reap stale sessions synchronously if can not do it asynchronously. Default to false
   - `logFn`             log messages. Defaults to console.log
   - `fallbackSessionFn` returns fallback session object after all failed retries. No defaults
 

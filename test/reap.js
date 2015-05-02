@@ -49,20 +49,20 @@ describe('reap', function () {
     fs.remove(SESSIONS_OPTIONS.path, done);
   });
 
-  it('should remove stale session file', function (done) {
-    helpers.reap(SESSIONS_OPTIONS, function () {
+  it('should removes stale session file', function (done) {
+    helpers.reap(SESSIONS_OPTIONS, function (err) {
       expect(err).to.not.exist;
       done();
     });
   });
 
-  it('should remove stale session file in the distinct process', function (done) {
-    childProcess.execFile('./reap-worker.js', [SESSIONS_OPTIONS.path, SESSIONS_OPTIONS.ttl], {
-      cwd: path.join(process.cwd(), 'lib')
-    }, function (err, stdout, stderr) {
-      expect(err).to.not.exist;
-      done();
-    });
-  });
+  //it('should removes stale session file using distinct process', function (done) {
+  //  childProcess.execFile('./reap-worker.js', [SESSIONS_OPTIONS.path, SESSIONS_OPTIONS.ttl], {
+  //    cwd: path.join(process.cwd(), 'lib')
+  //  }, function (err, stdout, stderr) {
+  //    expect(err).to.not.exist;
+  //    done();
+  //  });
+  //});
 });
 
