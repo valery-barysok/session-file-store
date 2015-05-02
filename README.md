@@ -6,9 +6,10 @@ Session file store for [Express](http://expressjs.com/) and [Connect](https://gi
 [![NPM Downloads][npm-downloads-image]][npm-url]
 [![Node.js Version][node-image]][node-url]
 [![Build Status][travis-image]][travis-url]
+[![Dependency Status][dependencies-image]][dependencies-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
 
-[![NPM](https://nodei.co/npm/session-file-store.png?downloads=true)][npm-url]
+[![NPM][npm-image]][npm-url]
 
 Session file store is a provision for storing session data in the session file
 
@@ -18,8 +19,8 @@ Session file store is a provision for storing session data in the session file
 
 ## Compatibility
 
-* Support Express `>= 4.x` and Connect `>= 1.4.0` through [express-session](https://github.com/expressjs/session)
-* Support Node.js `0.10`, `0.12` and [io.js](https://iojs.org)
+* Support Express `>= 4.x` and Connect `>= 1.4.0` through [express-session][express-session-url]
+* Support Node.js `0.10`, `0.12` and [io.js][io-url]
 
 ## Getting Started
 
@@ -68,12 +69,17 @@ You can found basic work app examples for express and connect frameworks in exam
 
 [npm-version-image]: https://img.shields.io/npm/v/session-file-store.svg
 [npm-downloads-image]: https://img.shields.io/npm/dm/session-file-store.svg
+[npm-image]: https://nodei.co/npm/session-file-store.png?downloads=true&downloadRank=true&stars=true
 [npm-url]: https://npmjs.org/package/session-file-store
 [travis-image]: https://img.shields.io/travis/valery-barysok/session-file-store/master.svg
 [travis-url]: https://travis-ci.org/valery-barysok/session-file-store
+[dependencies-image]: https://david-dm.org/valery-barysok/session-file-store.svg?style=flat
+[dependencies-url]: https://david-dm.org/valery-barysok/session-file-store
 [coveralls-image]: https://img.shields.io/coveralls/valery-barysok/session-file-store/master.svg
 [coveralls-url]: https://coveralls.io/r/valery-barysok/session-file-store?branch=master
 [node-image]: https://img.shields.io/node/v/session-file-store.svg
 [node-url]: http://nodejs.org/download/
 [gitter-join-chat-image]: https://badges.gitter.im/Join%20Chat.svg
 [gitter-channel-url]: https://gitter.im/valery-barysok/session-file-store
+[express-session-url]: https://github.com/expressjs/session
+[io-url]: https://iojs.org
