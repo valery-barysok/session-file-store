@@ -1,5 +1,7 @@
 # session-file-store
 
+Session file store for [Express](http://expressjs.com/) and [Connect](https://github.com/senchalabs/connect)
+
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
 [![Node.js Version][node-image]][node-url]
@@ -10,11 +12,14 @@
 
 Session file store is a provision for storing session data in the session file
 
-> Note: session-file-store supports express `>= 4.0.0` and connect `>=1.4.0`
-
 ## Community
 
 [![Join the chat at https://gitter.im/valery-barysok/session-file-store][gitter-join-chat-image]][gitter-channel-url]
+
+## Compatibility
+
+* Support Express `>= 4.x` and Connect `>= 1.4.0` through [express-session](https://github.com/expressjs/session)
+* Support Node.js `0.8`, `0.10`, `0.12` and [io.js](https://iojs.org)
 
 ## Installation
 
@@ -36,15 +41,19 @@ Session file store is a provision for storing session data in the session file
 
 ## Usage
 
+### Express or Connect integration
+
 Due to express `>= 4` changes, we need to pass `express-session` to the function `session-file-store` exports in order to extend `session.Store`:
 
+    ```js
     var session = require('express-session');
     var FileStore = require('session-file-store')(session);
-
+    
     app.use(session({
         store: new FileStore(options),
         secret: 'keyboard cat'
     }));
+    ```
 
 ## Examples
 
