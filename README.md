@@ -21,9 +21,16 @@ Session file store is a provision for storing session data in the session file
 * Support Express `>= 4.x` and Connect `>= 1.4.0` through [express-session](https://github.com/expressjs/session)
 * Support Node.js `0.10`, `0.12` and [io.js](https://iojs.org)
 
-## Installation
+## Getting Started
+
+### Installation
 
     $ npm install session-file-store
+
+### Running Tests
+
+    $ npm install
+    $ npm test
 
 ## Options
 
@@ -34,7 +41,7 @@ Session file store is a provision for storing session data in the session file
   - `minTimeout`        Defaults to 50
   - `maxTimeout`        Defaults to 100
   - `reapInterval`      Interval to clear expired sessions in seconds or -1 if do not need. Defaults to 1 hour
-  - `reapAsync`         use distinct worker process for removing stale sessions. Defaults to true
+  - `reapAsync`         use distinct worker process for removing stale sessions. Defaults to false
   - `reapSyncFallback`  reap stale sessions synchronously if can not do it asynchronously. Default to false
   - `logFn`             log messages. Defaults to console.log
   - `fallbackSessionFn` returns fallback session object after all failed retries. No defaults
