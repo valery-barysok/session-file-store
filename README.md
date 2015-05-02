@@ -45,15 +45,15 @@ Session file store is a provision for storing session data in the session file
 
 Due to express `>= 4` changes, we need to pass `express-session` to the function `session-file-store` exports in order to extend `session.Store`:
 
-    ```js
-    var session = require('express-session');
-    var FileStore = require('session-file-store')(session);
-    
-    app.use(session({
-        store: new FileStore(options),
-        secret: 'keyboard cat'
-    }));
-    ```
+```js
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
+
+app.use(session({
+    store: new FileStore(options),
+    secret: 'keyboard cat'
+}));
+```
 
 ## Examples
 
