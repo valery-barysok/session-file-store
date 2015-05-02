@@ -30,22 +30,23 @@
   },
   "homepage": "https://github.com/valery-barysok/session-file-store",
   "scripts": {
-    "test": "node_modules/.bin/mocha --reporter spec --bail --check-leaks test/",
-    "test-ci": "node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/",
-    "test-cov": "node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
-    "test-tap": "node_modules/.bin/mocha --reporter tap --check-leaks test/"
+    "test": "./node_modules/.bin/mocha --reporter spec --bail --check-leaks test/",
+    "test-ci": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/",
+    "test-cov": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
+    "test-tap": "./node_modules/.bin/mocha --reporter tap --check-leaks test/"
   },
   "engines": {
     "node": ">= 0.10.0"
   },
   "dependencies": {
-    "graceful-fs": "^3.0.6",
+    "fs-extra": "^0.18.2",
     "retry": "^0.6.1"
   },
   "devDependencies": {
     "chai": "^2.3.0",
     "coveralls": "^2.11.2",
     "istanbul": "^0.3.13",
+    "lodash.clone": "^3.0.1",
     "mocha": "^2.2.4"
   }
 }
