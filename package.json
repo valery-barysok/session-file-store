@@ -1,6 +1,6 @@
 {
   "name": "session-file-store",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Session file store is a provision for storing session data in the session file",
   "main": "index.js",
   "private": false,
@@ -16,9 +16,19 @@
     "connect"
   ],
   "author": {
-    "name": "Valery Barysok",
-    "name": "Igor Svehla"
+    "name": "Valery Barysok <valery.barysok@gmail.com>"
   },
+  "contributors": [
+    {
+      "name": "Igor Svehla (wespen)"
+    },
+    {
+      "name": "Bill Christo (bchr02)"
+    },
+    {
+      "name": "Ryan Murphy (r-murphy)"
+    }
+  ],
   "licenses": [
     {
       "type": "Apache-2.0",
