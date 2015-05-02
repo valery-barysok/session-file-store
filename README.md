@@ -19,7 +19,7 @@ Session file store is a provision for storing session data in the session file
 ## Compatibility
 
 * Support Express `>= 4.x` and Connect `>= 1.4.0` through [express-session](https://github.com/expressjs/session)
-* Support Node.js `0.8`, `0.10`, `0.12` and [io.js](https://iojs.org)
+* Support Node.js `0.10`, `0.12` and [io.js](https://iojs.org)
 
 ## Installation
 
