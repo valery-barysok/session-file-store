@@ -64,6 +64,36 @@ describe('helpers', function () {
       expect(options).to.have.property('logFn').that.be.a('function');
       expect(options).to.have.property('fallbackSessionFn').that.be.a('undefined');
     });
+
+    it('should returns provided options', function () {
+      var options = helpers.defaults({
+        path: './sessions2',
+        ttl: 4000,
+        retries: 1,
+        factor: 2,
+        minTimeout: 150,
+        maxTimeout: 200,
+        reapInterval: 4000,
+        reapAsync: true,
+        reapSyncFallback: true,
+        logFn: NOOP_FN,
+        fallbackSessionFn: NOOP_FN
+
+      });
+      expect(options).to.exist;
+      expect(options).to.have.property('path', path.normalize('./sessions2'));
+      expect(options).to.have.property('ttl', 4000);
+      expect(options).to.have.property('retries', 1);
+      expect(options).to.have.property('factor', 2);
+      expect(options).to.have.property('minTimeout', 150);
+      expect(options).to.have.property('maxTimeout', 200);
+      expect(options).to.have.property('filePattern').that.is.instanceOf(RegExp);
+      expect(options).to.have.property('reapInterval', 4000);
+      expect(options).to.have.property('reapAsync', true);
+      expect(options).to.have.property('reapSyncFallback', true);
+      expect(options).to.have.property('logFn', NOOP_FN);
+      expect(options).to.have.property('fallbackSessionFn', NOOP_FN);
+    });
   });
 
   describe('#sessionId', function () {
@@ -179,6 +209,7 @@ describe('helpers', function () {
   });
 
   describe('#get', function () {
+    this.timeout(500);
 
     it('should fails when no session file exists', function (done) {
       helpers.get('no_exists', FIXTURE_SESSIONS_OPTIONS, function (err, json) {
@@ -263,22 +294,58 @@ describe('helpers', function () {
   });
 
   describe('#clear', function () {
-    var SESSION_FILE = path.join(SESSIONS_OPTIONS.path, SESSION_ID + '.json');
 
-    before(function (done) {
-      fs.emptyDir(SESSIONS_OPTIONS.path, function () {
-        fs.writeJson(SESSION_FILE, SESSION, done);
+    describe('no destination folder exists', function () {
+
+      it('should fails when no folder exists', function (done) {
+        helpers.clear(FIXTURE_SESSIONS_NO_EXIST_OPTIONS, function (err) {
+          expect(err)
+            .to.be.ok
+            .and.is.an('array')
+            .with.deep.property('[0]')
+            .that.is.an("object")
+            .and.have.property('code', 'ENOENT');
+          done();
+        });
       });
     });
 
-    after(function (done) {
-      fs.remove(SESSIONS_OPTIONS.path, done);
+    describe('destination folder is empty', function () {
+
+      before(function (done) {
+        fs.emptyDir(SESSIONS_OPTIONS.path, done);
+      });
+
+      after(function (done) {
+        fs.remove(SESSIONS_OPTIONS.path, done);
+      });
+
+      it('should returns 0 when empty folder exists', function (done) {
+        helpers.clear(SESSIONS_OPTIONS, function (err) {
+          expect(err).to.not.exist;
+          done();
+        });
+      });
     });
 
-    it('should destroys session file', function (done) {
-      helpers.clear(SESSIONS_OPTIONS, function (err) {
-        expect(err).to.not.exist;
-        done();
+    describe('destination folder has some session files', function () {
+      var SESSION_FILE = path.join(SESSIONS_OPTIONS.path, SESSION_ID + '.json');
+
+      before(function (done) {
+        fs.emptyDir(SESSIONS_OPTIONS.path, function () {
+          fs.writeJson(SESSION_FILE, SESSION, done);
+        });
+      });
+
+      after(function (done) {
+        fs.remove(SESSIONS_OPTIONS.path, done);
+      });
+
+      it('should destroys session file', function (done) {
+        helpers.clear(SESSIONS_OPTIONS, function (err) {
+          expect(err).to.not.exist;
+          done();
+        });
       });
     });
   });

@@ -20,7 +20,7 @@ Session file store is a provision for storing session data in the session file
 ## Compatibility
 
 * Support Express `>= 4.x` and Connect `>= 1.4.0` through [express-session][express-session-url]
-* Support Node.js `0.10`, `0.12` and [io.js][io-url]
+* Support [Node.js][node-url] `0.10`, `0.12` and [io.js][io-url]
 
 ## Getting Started
 
@@ -65,7 +65,9 @@ app.use(session({
 
 ## Examples
 
-You can found basic work app examples for express and connect frameworks in example folder.
+You can found basic work [app examples](https://github.com/valery-barysok/session-file-store/tree/master/example)
+for [express](https://github.com/valery-barysok/session-file-store/tree/master/example/express-example) and
+[connect](https://github.com/valery-barysok/session-file-store/tree/master/example/connect-example) frameworks in example folder.
 
 [npm-version-image]: https://img.shields.io/npm/v/session-file-store.svg
 [npm-downloads-image]: https://img.shields.io/npm/dm/session-file-store.svg
