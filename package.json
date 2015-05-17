@@ -8,6 +8,12 @@
     "type": "git",
     "url": "https://github.com/valery-barysok/session-file-store"
   },
+  "files": [
+    "lib/",
+    "LICENSE",
+    "README.md",
+    "index.js"
+  ],
   "keywords": [
     "session",
     "file",
