@@ -65,9 +65,9 @@ app.use(session({
 
 ## Examples
 
-You can found basic work [app examples](https://github.com/valery-barysok/session-file-store/tree/master/example)
-for [express](https://github.com/valery-barysok/session-file-store/tree/master/example/express-example) and
-[connect](https://github.com/valery-barysok/session-file-store/tree/master/example/connect-example) frameworks in example folder.
+You can found basic work [app examples](https://github.com/valery-barysok/session-file-store/tree/master/examples)
+for [express](https://github.com/valery-barysok/session-file-store/tree/master/examples/express-example) and
+[connect](https://github.com/valery-barysok/session-file-store/tree/master/examples/connect-example) frameworks in example folder.
 
 [npm-version-image]: https://img.shields.io/npm/v/session-file-store.svg
 [npm-downloads-image]: https://img.shields.io/npm/dm/session-file-store.svg
