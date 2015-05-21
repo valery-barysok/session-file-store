@@ -15,7 +15,9 @@ app.use(function *(next) {
   yield next;
 });
 
-app.use(function *() {
+app.use(function *(next) {
+  if (this.method !== 'GET' || this.path !== '/') return yield next;
+
   if (this.req.session.views) {
     this.req.session.views++;
     this.body = '<p>views: ' + this.req.session.views + '</p>';
