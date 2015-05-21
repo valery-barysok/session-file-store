@@ -1,0 +1,13 @@
+{
+  "name": "file-session",
+  "version": "0.0.1",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express-session": "^1.11.2",
+    "koa": "^0.20.0",
+    "session-file-store": "*"
+  }
+}
