@@ -75,7 +75,7 @@ for [express](https://github.com/valery-barysok/session-file-store/tree/master/e
 [npm-url]: https://npmjs.org/package/session-file-store
 [travis-image]: https://img.shields.io/travis/valery-barysok/session-file-store/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/valery-barysok/session-file-store
-[dependencies-image]: https://david-dm.org/valery-barysok/session-file-store.svg?style=flat
+[dependencies-image]: https://david-dm.org/valery-barysok/session-file-store.svg?style=flat-square
 [dependencies-url]: https://david-dm.org/valery-barysok/session-file-store
 [coveralls-image]: https://img.shields.io/coveralls/valery-barysok/session-file-store/master.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/valery-barysok/session-file-store?branch=master
