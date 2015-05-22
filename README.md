@@ -69,17 +69,17 @@ You can found basic work [app examples](https://github.com/valery-barysok/sessio
 for [express](https://github.com/valery-barysok/session-file-store/tree/master/examples/express-example) and
 [connect](https://github.com/valery-barysok/session-file-store/tree/master/examples/connect-example) frameworks in `examples` folder.
 
-[npm-version-image]: https://img.shields.io/npm/v/session-file-store.svg
-[npm-downloads-image]: https://img.shields.io/npm/dm/session-file-store.svg
+[npm-version-image]: https://img.shields.io/npm/v/session-file-store.svg?style=flat-square
+[npm-downloads-image]: https://img.shields.io/npm/dm/session-file-store.svg?style=flat-square
 [npm-image]: https://nodei.co/npm/session-file-store.png?downloads=true&downloadRank=true&stars=true
 [npm-url]: https://npmjs.org/package/session-file-store
-[travis-image]: https://img.shields.io/travis/valery-barysok/session-file-store/master.svg
+[travis-image]: https://img.shields.io/travis/valery-barysok/session-file-store/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/valery-barysok/session-file-store
 [dependencies-image]: https://david-dm.org/valery-barysok/session-file-store.svg?style=flat
 [dependencies-url]: https://david-dm.org/valery-barysok/session-file-store
-[coveralls-image]: https://img.shields.io/coveralls/valery-barysok/session-file-store/master.svg
+[coveralls-image]: https://img.shields.io/coveralls/valery-barysok/session-file-store/master.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/valery-barysok/session-file-store?branch=master
-[node-image]: https://img.shields.io/node/v/session-file-store.svg
+[node-image]: https://img.shields.io/node/v/session-file-store.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
 [gitter-join-chat-image]: https://badges.gitter.im/Join%20Chat.svg
 [gitter-channel-url]: https://gitter.im/valery-barysok/session-file-store
