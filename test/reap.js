@@ -57,14 +57,17 @@ describe('reap', function () {
   });
 
   it('should removes stale session file using distinct process', function (done) {
-    childProcess.execSync('chmod +x ./reap-worker.js', {
+    childProcess.exec('chmod +x ./reap-worker.js', {
       cwd: path.join(process.cwd(), 'lib')
-    });
-    helpers.scheduleAsyncReap(SESSIONS_OPTIONS, function(){
-      fs.stat(EXPIRED_SESSION_FILE, function(err){
-        expect(err).to.exist;
-        done();
-      });
+    }, function(err) {
+      if (!err) {
+        helpers.scheduleAsyncReap(SESSIONS_OPTIONS, function(){
+          fs.stat(EXPIRED_SESSION_FILE, function(err){
+            expect(err).to.exist;
+            done();
+          });
+        });
+      }
     });
   });
 });
