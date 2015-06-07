@@ -56,13 +56,19 @@ describe('reap', function () {
     });
   });
 
-  //it('should removes stale session file using distinct process', function (done) {
-  //  childProcess.execFile('./reap-worker.js', [SESSIONS_OPTIONS.path, SESSIONS_OPTIONS.ttl], {
-  //    cwd: path.join(process.cwd(), 'lib')
-  //  }, function (err, stdout, stderr) {
-  //    expect(err).to.not.exist;
-  //    done();
-  //  });
-  //});
+  it('should removes stale session file using distinct process', function (done) {
+    childProcess.exec('chmod +x ./reap-worker.js', {
+      cwd: path.join(process.cwd(), 'lib')
+    }, function(err) {
+      if (!err) {
+        helpers.scheduleAsyncReap(SESSIONS_OPTIONS, function(){
+          fs.stat(EXPIRED_SESSION_FILE, function(err){
+            expect(err).to.exist;
+            done();
+          });
+        });
+      }
+    });
+  });
 });
 
