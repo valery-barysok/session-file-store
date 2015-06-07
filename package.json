@@ -1,6 +1,6 @@
 {
   "name": "session-file-store",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Session file store is a provision for storing session data in the session file",
   "main": "index.js",
   "private": false,
@@ -33,6 +33,9 @@
     },
     {
       "name": "Ryan Murphy (r-murphy)"
+    },
+    {
+      "name": "Norberth Danson (ndanson)"
     }
   ],
   "licenses": [
