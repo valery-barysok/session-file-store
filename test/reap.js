@@ -61,7 +61,7 @@ describe('reap', function () {
       cwd: path.join(process.cwd(), 'lib')
     }, function (err) {
       if (!err) {
-        helpers.scheduleAsyncReap(SESSIONS_OPTIONS, function () {
+        helpers.asyncReap(SESSIONS_OPTIONS, function () {
           fs.stat(EXPIRED_SESSION_FILE, function (err) {
             expect(err).to.exist;
             done();
