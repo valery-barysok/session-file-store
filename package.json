@@ -36,6 +36,9 @@
     },
     {
       "name": "Norberth Danson (ndanson)"
+    },
+    {
+      "name": "Arnaud Bétrémieux (arnoo)"
     }
   ],
   "licenses": [
@@ -59,7 +62,7 @@
   },
   "dependencies": {
     "bagpipe": "^0.3.5",
-    "fs-extra": "^0.18.2",
+    "fs-extra": "^0.20.0",
     "retry": "^0.6.1"
   },
   "devDependencies": {

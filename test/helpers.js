@@ -78,8 +78,8 @@ describe('helpers', function () {
         reapSyncFallback: true,
         logFn: NOOP_FN,
         fallbackSessionFn: NOOP_FN
-
       });
+
       expect(options).to.exist;
       expect(options).to.have.property('path', path.normalize('./sessions2'));
       expect(options).to.have.property('ttl', 4000);
