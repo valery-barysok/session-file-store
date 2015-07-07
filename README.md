@@ -1,6 +1,7 @@
 # session-file-store
 
-Session file store for [Express](http://expressjs.com/) and [Connect](https://github.com/senchalabs/connect)
+Session file store for [Express](http://expressjs.com/) and [Connect](https://github.com/senchalabs/connect).
+Also you can use it with [Koa](http://koajs.com/)
 
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
@@ -19,8 +20,9 @@ Session file store is a provision for storing session data in the session file
 
 ## Compatibility
 
-* Support Express `>= 4.x` and Connect `>= 1.4.0` through [express-session][express-session-url]
-* Support [Node.js][node-url] `0.10`, `0.12` and [io.js][io-url]
+* Supports Express `>= 4.x` and Connect `>= 1.4.0` through [express-session][express-session-url]
+* Supports [Node.js][node-url] `0.10`, `0.12` and [io.js][io-url]
+* Indirectly supports Koa `>=0.9.0` through [express-session][express-session-url]
 
 ## Getting Started
 
@@ -36,11 +38,11 @@ Session file store is a provision for storing session data in the session file
 ## Options
 
   - `path`              The directory where the session files will be stored. Defaults to `./sessions`
-  - `ttl`               Time to live in seconds. Defaults to 3600
+  - `ttl`               Session time to live in seconds. Defaults to 3600
   - `retries`           The number of retries to get session data from a session file. Defaults to 5
-  - `factor`            Defaults to 1
-  - `minTimeout`        Defaults to 50
-  - `maxTimeout`        Defaults to 100
+  - `factor`            The exponential factor to use for retry. Defaults to 1
+  - `minTimeout`        The number of milliseconds before starting the first retry. Defaults to 50
+  - `maxTimeout`        The maximum number of milliseconds between two retries. Defaults to 100
   - `reapInterval`      Interval to clear expired sessions in seconds or -1 if do not need. Defaults to 1 hour
   - `reapAsync`         use distinct worker process for removing stale sessions. Defaults to false
   - `reapSyncFallback`  reap stale sessions synchronously if can not do it asynchronously. Default to false
@@ -66,8 +68,9 @@ app.use(session({
 ## Examples
 
 You can found basic work [app examples](https://github.com/valery-barysok/session-file-store/tree/master/examples)
-for [express](https://github.com/valery-barysok/session-file-store/tree/master/examples/express-example) and
-[connect](https://github.com/valery-barysok/session-file-store/tree/master/examples/connect-example) frameworks in `examples` folder.
+for [express](https://github.com/valery-barysok/session-file-store/tree/master/examples/express-example),
+[connect](https://github.com/valery-barysok/session-file-store/tree/master/examples/connect-example) and
+[koa](https://github.com/valery-barysok/session-file-store/tree/master/examples/koa-example) frameworks in `examples` folder.
 
 [npm-version-image]: https://img.shields.io/npm/v/session-file-store.svg?style=flat-square
 [npm-downloads-image]: https://img.shields.io/npm/dm/session-file-store.svg?style=flat-square
