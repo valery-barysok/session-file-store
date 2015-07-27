@@ -233,10 +233,10 @@ describe('helpers', function () {
       });
     });
 
-    it('should succeeds when valid session file exists', function (done) {
+    it('should succeeds when valid expired session file exists', function (done) {
       helpers.get('2o7sOpgMqMGWem0IxddjE0DkR3-jqUPx', FIXTURE_SESSIONS_OPTIONS, function (err, json) {
         expect(err).to.not.exist;
-        expect(json).to.be.ok;
+        expect(json).to.not.exist;
         done();
       });
     });
