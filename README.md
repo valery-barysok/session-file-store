@@ -6,8 +6,10 @@ Also you can use it with [Koa](http://koajs.com/)
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
 [![Node.js Version][node-image]][node-url]
+
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][dependencies-image]][dependencies-url]
+[![devDependency Status][dev-dependencies-image]][dev-dependencies-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
 
 [![NPM][npm-image]][npm-url]
@@ -80,6 +82,8 @@ for [express](https://github.com/valery-barysok/session-file-store/tree/master/e
 [travis-url]: https://travis-ci.org/valery-barysok/session-file-store
 [dependencies-image]: https://david-dm.org/valery-barysok/session-file-store.svg?style=flat-square
 [dependencies-url]: https://david-dm.org/valery-barysok/session-file-store
+[dev-dependencies-image]: https://david-dm.org/valery-barysok/session-file-store/dev-status.svg?style=flat-square
+[dev-dependencies-url]: https://david-dm.org/valery-barysok/session-file-store#info=devDependencies
 [coveralls-image]: https://img.shields.io/coveralls/valery-barysok/session-file-store/master.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/valery-barysok/session-file-store?branch=master
 [node-image]: https://img.shields.io/node/v/session-file-store.svg?style=flat-square
