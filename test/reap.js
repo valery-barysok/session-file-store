@@ -1,11 +1,11 @@
 var helpers = require('../lib/session-file-helpers'),
-  chai = require('chai'),
-  expect = chai.expect,
-  fs = require('fs-extra'),
-  os = require('os'),
-  path = require('path'),
-  childProcess = require('child_process'),
-  clone = require('lodash.clone');
+    chai = require('chai'),
+    expect = chai.expect,
+    fs = require('fs-extra'),
+    os = require('os'),
+    path = require('path'),
+    childProcess = require('child_process'),
+    clone = require('lodash.clone');
 
 describe('reap', function () {
   var SESSIONS_PATH = path.join(os.tmpdir(), 'sessions');
@@ -57,18 +57,26 @@ describe('reap', function () {
   });
 
   it('should removes stale session file using distinct process', function (done) {
-    childProcess.exec('chmod +x ./reap-worker.js', {
-      cwd: path.join(process.cwd(), 'lib')
-    }, function (err) {
-      if (!err) {
-        helpers.asyncReap(SESSIONS_OPTIONS, function () {
-          fs.stat(EXPIRED_SESSION_FILE, function (err) {
-            expect(err).to.exist;
-            done();
-          });
+    function asyncReap() {
+      helpers.asyncReap(SESSIONS_OPTIONS, function () {
+        fs.stat(EXPIRED_SESSION_FILE, function (err) {
+          expect(err).to.exist;
+          done();
         });
-      }
-    });
+      });
+    }
+
+    if (os.platform() == 'win32') {
+      asyncReap();
+    } else {
+      childProcess.exec('chmod +x ./reap-worker.js', {
+        cwd: path.join(process.cwd(), 'lib')
+      }, function (err) {
+        if (!err) {
+          asyncReap();
+        }
+      });
+    }
   });
 });
 
