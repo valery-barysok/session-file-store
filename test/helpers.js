@@ -1,10 +1,10 @@
-var helpers = require('../lib/session-file-helpers'),
-  chai = require('chai'),
-  expect = chai.expect,
-  fs = require('fs-extra'),
-  os = require('os'),
-  path = require('path'),
-  clone = require('lodash.clone');
+var helpers = require('../lib/session-file-helpers');
+var chai = require('chai');
+var expect = chai.expect;
+var fs = require('fs-extra');
+var os = require('os');
+var path = require('path');
+var clone = require('lodash.clone');
 
 describe('helpers', function () {
   var FIXTURE_SESSIONS_PATH = path.normalize('test/fixtures/sessions');
@@ -122,9 +122,9 @@ describe('helpers', function () {
       it('should fails when no folder exists', function (done) {
         helpers.length(FIXTURE_SESSIONS_NO_EXIST_OPTIONS, function (err, result) {
           expect(err)
-            .to.be.ok
-            .and.is.an('object')
-            .and.have.property('code', 'ENOENT');
+              .to.be.ok
+              .and.is.an('object')
+              .and.have.property('code', 'ENOENT');
           expect(result).to.not.exist;
           done();
         });
@@ -169,9 +169,9 @@ describe('helpers', function () {
       it('should fails when no folder exists', function (done) {
         helpers.list(FIXTURE_SESSIONS_NO_EXIST_OPTIONS, function (err, result) {
           expect(err)
-            .to.be.ok
-            .and.is.an('object')
-            .and.have.property('code', 'ENOENT');
+              .to.be.ok
+              .and.is.an('object')
+              .and.have.property('code', 'ENOENT');
           done();
         });
       });
@@ -214,9 +214,9 @@ describe('helpers', function () {
     it('should fails when no session file exists', function (done) {
       helpers.get('no_exists', FIXTURE_SESSIONS_OPTIONS, function (err, json) {
         expect(err)
-          .to.be.ok
-          .and.is.an('object')
-          .and.have.property('code', 'ENOENT');
+            .to.be.ok
+            .and.is.an('object')
+            .and.have.property('code', 'ENOENT');
         expect(json).to.not.exist;
         done();
       });
@@ -225,9 +225,9 @@ describe('helpers', function () {
     it('should fails when invalid session file exists', function (done) {
       helpers.get('2o7sOpgMqMGWem0IxddjE0DkR3-jqUPS', FIXTURE_SESSIONS_OPTIONS, function (err, json) {
         expect(err)
-          .to.be.ok
-          .and.is.an('object')
-          .and.have.property('code', 'ENOENT');
+            .to.be.ok
+            .and.is.an('object')
+            .and.have.property('code', 'ENOENT');
         expect(json).to.not.exist;
         done();
       });
@@ -300,11 +300,11 @@ describe('helpers', function () {
       it('should fails when no folder exists', function (done) {
         helpers.clear(FIXTURE_SESSIONS_NO_EXIST_OPTIONS, function (err) {
           expect(err)
-            .to.be.ok
-            .and.is.an('array')
-            .with.deep.property('[0]')
-            .that.is.an("object")
-            .and.have.property('code', 'ENOENT');
+              .to.be.ok
+              .and.is.an('array')
+              .with.deep.property('[0]')
+              .that.is.an("object")
+              .and.have.property('code', 'ENOENT');
           done();
         });
       });

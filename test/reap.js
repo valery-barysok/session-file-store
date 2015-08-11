@@ -1,11 +1,12 @@
-var helpers = require('../lib/session-file-helpers'),
-    chai = require('chai'),
-    expect = chai.expect,
-    fs = require('fs-extra'),
-    os = require('os'),
-    path = require('path'),
-    childProcess = require('child_process'),
-    clone = require('lodash.clone');
+var helpers = require('../lib/session-file-helpers');
+var chai = require('chai');
+var expect = chai.expect;
+var fs = require('fs-extra');
+var os = require('os');
+var path = require('path');
+var childProcess = require('child_process');
+var clone = require('lodash.clone');
+var isWindows = process.platform === 'win32';
 
 describe('reap', function () {
   var SESSIONS_PATH = path.join(os.tmpdir(), 'sessions');
@@ -66,7 +67,7 @@ describe('reap', function () {
       });
     }
 
-    if (os.platform() == 'win32') {
+    if (isWindows) {
       asyncReap();
     } else {
       childProcess.exec('chmod +x ./reap-worker.js', {
@@ -79,4 +80,3 @@ describe('reap', function () {
     }
   });
 });
-

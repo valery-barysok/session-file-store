@@ -1,9 +1,9 @@
-var helpers = require('../lib/session-file-helpers'),
-  chai = require('chai'),
-  expect = chai.expect,
-  fs = require('fs-extra'),
-  os = require('os'),
-  path = require('path');
+var helpers = require('../lib/session-file-helpers');
+var chai = require('chai');
+var expect = chai.expect;
+var fs = require('fs-extra');
+var os = require('os');
+var path = require('path');
 
 var session = function () {
 };
@@ -41,9 +41,9 @@ describe('store', function () {
           it('should fails when no folder exists', function (done) {
             store.length(function (err, result) {
               expect(err)
-                .to.be.ok
-                .and.is.an('object')
-                .and.have.property('code', 'ENOENT');
+                  .to.be.ok
+                  .and.is.an('object')
+                  .and.have.property('code', 'ENOENT');
               expect(result).to.not.exist;
               done();
             });
