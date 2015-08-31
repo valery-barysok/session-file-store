@@ -49,7 +49,7 @@ Session file store is a provision for storing session data in the session file
   - `reapAsync`         use distinct worker process for removing stale sessions. Defaults to false
   - `reapSyncFallback`  reap stale sessions synchronously if can not do it asynchronously. Default to false
   - `logFn`             log messages. To filter logs check `err` for error type and `message` for more informations. Defaults to console.log
-  - `expireCallback`    if provided it's called when a session expires with `expireCallback(er, json)`. `json` contains cookie data and sessionId.
+  - `expireCallback`    if provided it's called when a session expires with `expireCallback(err, json)`. `json` contains cookie data and sessionId.
   - `fallbackSessionFn` returns fallback session object after all failed retries. No defaults
 
 ## Usage
