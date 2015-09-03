@@ -66,6 +66,15 @@ app.use(session({
     secret: 'keyboard cat'
 }));
 ```
+### Detect when a session is detected as expired
+
+If you want to detect when a session is reported as expired you have two choices:
+
+1. Set cookie `maxAge` and wait until reap worker starts and deletes all expired sessions.
+2. Don't set cookie `maxAge` but set the `ttl` and wait until request with a cookie associated with an expired session arrives to the server.
+
+After setting one of these values all you have to do is `sessionStore.on('sessionExpired', callback(session))`. The `session` object has `sessionId` so you can use it to do your stuff about reporting an user as logged out for example.
+
 
 ## Examples
 
