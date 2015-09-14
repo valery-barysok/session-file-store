@@ -2,18 +2,6 @@
   "name": "session-file-store",
   "version": "0.0.19",
   "description": "Session file store is a provision for storing session data in the session file",
-  "main": "index.js",
-  "private": false,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/valery-barysok/session-file-store"
-  },
-  "files": [
-    "lib/",
-    "LICENSE",
-    "README.md",
-    "index.js"
-  ],
   "keywords": [
     "session",
     "file",
@@ -21,9 +9,23 @@
     "express",
     "connect"
   ],
-  "author": {
-    "name": "Valery Barysok <valery.barysok@gmail.com>"
+  "main": "index.js",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/valery-barysok/session-file-store"
   },
+  "bugs": {
+    "url": "https://github.com/valery-barysok/session-file-store/issues"
+  },
+  "homepage": "https://github.com/valery-barysok/session-file-store",
+  "files": [
+    "lib/",
+    "LICENSE",
+    "README.md",
+    "index.js"
+  ],
+  "author": "Valery Barysok <valery.barysok@gmail.com>",
   "contributors": [
     {
       "name": "Igor Svehla (wespen)"
@@ -44,22 +46,13 @@
       "name": "Guson (gusonyang)"
     }
   ],
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
-  ],
-  "bugs": {
-    "url": "https://github.com/valery-barysok/session-file-store/issues"
-  },
-  "homepage": "https://github.com/valery-barysok/session-file-store",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec --bail --check-leaks test/",
     "test-ci": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/",
     "test-cov": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
     "test-tap": "./node_modules/.bin/mocha --reporter tap --check-leaks test/"
   },
+  "license": "APACHE-2.0",
   "engines": {
     "node": ">= 0.10.0"
   },

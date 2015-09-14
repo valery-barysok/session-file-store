@@ -3,6 +3,7 @@
 Session file store for [Express](http://expressjs.com/) and [Connect](https://github.com/senchalabs/connect).
 Also you can use it with [Koa](http://koajs.com/)
 
+[![Join the chat at https://gitter.im/valery-barysok/session-file-store][gitter-join-chat-image]][gitter-channel-url]
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
 [![Node.js Version][node-image]][node-url]
@@ -16,15 +17,11 @@ Also you can use it with [Koa](http://koajs.com/)
 
 Session file store is a provision for storing session data in the session file
 
-## Community
-
-[![Join the chat at https://gitter.im/valery-barysok/session-file-store][gitter-join-chat-image]][gitter-channel-url]
-
 ## Compatibility
 
 * Supports Express `>= 4.x` and Connect `>= 1.4.0` through [express-session][express-session-url]
-* Supports [Node.js][node-url] `0.10`, `0.12` and [io.js][io-url]
-* Indirectly supports Koa `>=0.9.0` through [express-session][express-session-url]
+* Supports [Node.js][node-url] `>= 0.10` and [io.js][io-url]
+* Indirectly supports Koa `>= 0.9.0` through [express-session][express-session-url]
 
 ## Getting Started
 
@@ -89,6 +86,6 @@ for [express](https://github.com/valery-barysok/session-file-store/tree/master/e
 [node-image]: https://img.shields.io/node/v/session-file-store.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
 [gitter-join-chat-image]: https://badges.gitter.im/Join%20Chat.svg
-[gitter-channel-url]: https://gitter.im/valery-barysok/session-file-store
+[gitter-channel-url]: https://gitter.im/valery-barysok/session-file-store?style=flat-square
 [express-session-url]: https://github.com/expressjs/session
 [io-url]: https://iojs.org
