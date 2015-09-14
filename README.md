@@ -48,7 +48,8 @@ Session file store is a provision for storing session data in the session file
   - `reapInterval`      Interval to clear expired sessions in seconds or -1 if do not need. Defaults to 1 hour
   - `reapAsync`         use distinct worker process for removing stale sessions. Defaults to false
   - `reapSyncFallback`  reap stale sessions synchronously if can not do it asynchronously. Default to false
-  - `logFn`             log messages. Defaults to console.log
+  - `logFn`             log messages. To filter logs check `err` for error type and `message` for more informations. Defaults to console.log
+  - `expireCallback`    if provided it's called when a session expires with `expireCallback(err, json)`. `json` contains cookie data and sessionId.
   - `fallbackSessionFn` returns fallback session object after all failed retries. No defaults
 
 ## Usage
@@ -66,6 +67,15 @@ app.use(session({
     secret: 'keyboard cat'
 }));
 ```
+### Detect when a session is detected as expired
+
+If you want to detect when a session is reported as expired you have two choices:
+
+1. Set cookie `maxAge` and wait until reap worker starts and deletes all expired sessions.
+2. Don't set cookie `maxAge` but set the `ttl` and wait until request with a cookie associated with an expired session arrives to the server.
+
+After setting one of these values all you have to do is `sessionStore.on('sessionExpired', callback(session))`. The `session` object has `sessionId` so you can use it to do your stuff about reporting an user as logged out for example.
+
 
 ## Examples
 
