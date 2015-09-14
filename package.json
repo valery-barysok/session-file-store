@@ -1,6 +1,6 @@
 {
   "name": "session-file-store",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Session file store is a provision for storing session data in the session file",
   "keywords": [
     "session",
