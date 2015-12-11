@@ -258,13 +258,31 @@ describe('helpers', function () {
       });
     });
 
-    it('should succeeds with encrypt when valid session file exists and is encrypted', function (done) {
+    it('should fail with encrypt when valid expired session file exists and is encrypted', function (done) {
       helpers.get('wHoYJ_tqdwmStiQ8ZX0KSulYqhMQ9_hH', ENCRYPT_OPTIONS, function (err, json) {
         expect(err).to.not.exist;
-        expect(json).to.be.ok;
+        expect(json).to.not.exist;
         done();
       });
     });
+
+    it('should succeeds with encrypt when valid non-exired session file exists and is encrypted', function (done) {
+      var session = clone(SESSION);
+      session.__lastAccess = 0;
+      // first we create a session file in order to read a valid one later
+      helpers.set(SESSION_ID, session, ENCRYPT_OPTIONS, function (err, json) {
+        expect(err).to.not.exist;
+        expect(json).to.have.property('__lastAccess');
+        expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
+        // read the valid json file
+        helpers.get(SESSION_ID, ENCRYPT_OPTIONS, function (err, json) {
+          expect(err).to.not.exist;
+          expect(json).to.be.ok;
+          done();
+        });
+      });
+
+    })
   });
 
   describe('#set', function () {
