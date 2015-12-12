@@ -47,6 +47,7 @@ Session file store is a provision for storing session data in the session file
   - `reapSyncFallback`  reap stale sessions synchronously if can not do it asynchronously. Default to false
   - `logFn`             log messages. Defaults to console.log
   - `fallbackSessionFn` returns fallback session object after all failed retries. No defaults
+  - `encrypt`           Enables encryption of the session before writing the file and also decryption when reading it.
 
 ## Usage
 
