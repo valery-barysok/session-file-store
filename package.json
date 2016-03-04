@@ -61,14 +61,15 @@
   },
   "dependencies": {
     "bagpipe": "^0.3.5",
-    "fs-extra": "^0.26.0",
-    "retry": "^0.8.0"
+    "fs-extra": "^0.26.5",
+    "retry": "^0.9.0",
+    "write-file-atomic": "^1.1.4"
   },
   "devDependencies": {
     "chai": "^2.3.0",
-    "coveralls": "^2.11.4",
-    "istanbul": "^0.4.0",
-    "lodash.clone": "^3.0.2",
+    "coveralls": "^2.11.8",
+    "istanbul": "^0.4.2",
+    "lodash.clone": "^4.3.1",
     "mocha": "^2.3.3"
   }
 }
