@@ -36,18 +36,19 @@ Session file store is a provision for storing session data in the session file
 
 ## Options
 
-  - `path`              The directory where the session files will be stored. Defaults to `./sessions`
-  - `ttl`               Session time to live in seconds. Defaults to 3600
-  - `retries`           The number of retries to get session data from a session file. Defaults to 5
-  - `factor`            The exponential factor to use for retry. Defaults to 1
-  - `minTimeout`        The number of milliseconds before starting the first retry. Defaults to 50
-  - `maxTimeout`        The maximum number of milliseconds between two retries. Defaults to 100
-  - `reapInterval`      Interval to clear expired sessions in seconds or -1 if do not need. Defaults to 1 hour
-  - `reapAsync`         use distinct worker process for removing stale sessions. Defaults to false
-  - `reapSyncFallback`  reap stale sessions synchronously if can not do it asynchronously. Default to false
-  - `logFn`             log messages. Defaults to console.log
-  - `fallbackSessionFn` returns fallback session object after all failed retries. No defaults
-  - `encrypt`           Enables encryption of the session before writing the file and also decryption when reading it.
+  - `path`               The directory where the session files will be stored. Defaults to `./sessions`
+  - `ttl`                Session time to live in seconds. Defaults to 3600
+  - `retries`            The number of retries to get session data from a session file. Defaults to 5
+  - `factor`             The exponential factor to use for retry. Defaults to 1
+  - `minTimeout`         The number of milliseconds before starting the first retry. Defaults to 50
+  - `maxTimeout`         The maximum number of milliseconds between two retries. Defaults to 100
+  - `reapIntervalObject` [OUT] Contains intervalObject if reap was scheduled
+  - `reapInterval`       Interval to clear expired sessions in seconds or -1 if do not need. Defaults to 1 hour
+  - `reapAsync`          use distinct worker process for removing stale sessions. Defaults to false
+  - `reapSyncFallback`   reap stale sessions synchronously if can not do it asynchronously. Default to false
+  - `logFn`              log messages. Defaults to console.log
+  - `fallbackSessionFn`  returns fallback session object after all failed retries. No defaults
+  - `encrypt`            Enables encryption of the session before writing the file and also decryption when reading it.
 
 ## Usage
 
@@ -86,7 +87,7 @@ for [express](https://github.com/valery-barysok/session-file-store/tree/master/e
 [coveralls-url]: https://coveralls.io/r/valery-barysok/session-file-store?branch=master
 [node-image]: https://img.shields.io/node/v/session-file-store.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
-[gitter-join-chat-image]: https://badges.gitter.im/Join%20Chat.svg
+[gitter-join-chat-image]: https://badges.gitter.im/Join%20Chat.svg?style=flat-square
 [gitter-channel-url]: https://gitter.im/valery-barysok/session-file-store?style=flat-square
 [express-session-url]: https://github.com/expressjs/session
 [io-url]: https://iojs.org
