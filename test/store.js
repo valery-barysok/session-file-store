@@ -18,7 +18,8 @@ describe('store', function () {
   };
   var SESSIONS_OPTIONS = helpers.defaults({
     path: SESSIONS_PATH,
-    logFn: NOOP_FN
+    logFn: NOOP_FN,
+    reapInterval: 10000
   });
 
   describe('#constructor', function () {
@@ -68,6 +69,20 @@ describe('store', function () {
             });
           });
         });
+      });
+
+      describe('#reapIntervalObject', function () {
+        after(function () {
+          if (SESSIONS_OPTIONS.reapIntervalObject) {
+            clearInterval(SESSIONS_OPTIONS.reapIntervalObject);
+            SESSIONS_OPTIONS.reapIntervalObject = undefined;
+          }
+        });
+
+        it('should contains reapIntervalObject object', function (done) {
+          expect(SESSIONS_OPTIONS.reapIntervalObject).to.be.ok;
+          done();
+        })
       });
     });
   });
