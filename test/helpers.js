@@ -107,12 +107,12 @@ describe('helpers', function () {
 
   describe('#sessionId', function () {
     it('should returns session id when valid json file name is passed', function () {
-      var sessionId = helpers.sessionId('id.json');
+      var sessionId = helpers.sessionId(helpers.defaults({}), 'id.json');
       expect(sessionId).is.equal('id');
     });
 
     it('should returns no session id when invalid file name is passed', function () {
-      var sessionId = helpers.sessionId('id');
+      var sessionId = helpers.sessionId(helpers.defaults({}), 'id');
       expect(sessionId).is.equal('');
     });
   });
