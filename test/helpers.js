@@ -5,7 +5,7 @@ var fs = require('fs-extra');
 var os = require('os');
 var path = require('path');
 var clone = require('lodash.clone');
-var cbor = require('cbor');
+var cbor = require('cbor-sync');
 
 describe('helpers', function () {
   var FIXTURE_SESSIONS_PATH = path.normalize('test/fixtures/sessions');
@@ -67,7 +67,7 @@ describe('helpers', function () {
     encrypt: false,
     encoding: null,
     encoder: cbor.encode,
-    decoder: cbor.decodeFirstSync
+    decoder: cbor.decode
   });
 
   describe('#defaults', function () {
