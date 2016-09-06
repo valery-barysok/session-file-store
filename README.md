@@ -49,6 +49,11 @@ Session file store is a provision for storing session data in the session file
   - `logFn`              log messages. Defaults to console.log
   - `fallbackSessionFn`  returns fallback session object after all failed retries. No defaults
   - `encrypt`            Enables encryption of the session before writing the file and also decryption when reading it.
+  - `encryptEncoding`    Encryption output encoding. Defaults to 'hex'
+  - `encoding`           Object-to-text text encoding. Can be null. Defaults to 'utf8'
+  - `encoder`            Encoding function. Takes object, returns encoded data. Defaults to JSON.stringify
+  - `decoder`            Decoding function. Takes encoded data, returns object. Defaults to JSON.parse
+  - `fileExtension`      File extension of saved files. Defaults to '.json'
 
 ## Usage
 
