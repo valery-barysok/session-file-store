@@ -5,6 +5,7 @@ var fs = require('fs-extra');
 var os = require('os');
 var path = require('path');
 var clone = require('lodash.clone');
+var cbor = require('cbor');
 
 describe('helpers', function () {
   var FIXTURE_SESSIONS_PATH = path.normalize('test/fixtures/sessions');
@@ -58,6 +59,15 @@ describe('helpers', function () {
     fileExtension: '.aesctrjson',
     encrypt: true,
     encryptEncoding: null
+  });
+  var CBOR_OPTIONS = helpers.defaults({
+    path: FIXTURE_SESSIONS_PATH,
+    logFn: NOOP_FN,
+    fileExtension: '.cbor',
+    encrypt: false,
+    encoding: null,
+    encoder: cbor.encode,
+    decoder: cbor.decodeFirstSync
   });
 
   describe('#defaults', function () {
@@ -315,6 +325,32 @@ describe('helpers', function () {
       });
     });
 
+
+    it('should fail when valid expired session file exists with cbor', function (done) {
+      helpers.get('YH7h3CPKKWJa10-xJyEDqzbM56c8xblR', CBOR_OPTIONS, function (err, json) {
+        console.log(err, json);
+        expect(err).to.not.exist;
+        expect(json).to.not.exist;
+        done();
+      });
+    });
+
+    it('should succeeds when valid non-exired session file exists with cbor', function (done) {
+      var session = clone(SESSION);
+      session.__lastAccess = 0;
+      // first we create a session file in order to read a valid one later
+      helpers.set(SESSION_ID, session, CBOR_OPTIONS, function (err, json) {
+        expect(err).to.not.exist;
+        expect(json).to.have.property('__lastAccess');
+        expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
+        // read the valid json file
+        helpers.get(SESSION_ID, CBOR_OPTIONS, function (err, json) {
+          expect(err).to.not.exist;
+          expect(json).to.be.ok;
+          done();
+        });
+      });
+    });
   });
 
   describe('#set', function () {
@@ -353,6 +389,17 @@ describe('helpers', function () {
       var session = clone(SESSION);
       session.__lastAccess = 0;
       helpers.set(SESSION_ID, session, ENCRYPT_OPTIONS_CUSTOM_ENCODING, function (err, json) {
+        expect(err).to.not.exist;
+        expect(json).to.have.property('__lastAccess');
+        expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
+        done();
+      });
+    });
+
+    it('should creates new session file with cbor', function (done) {
+      var session = clone(SESSION);
+      session.__lastAccess = 0;
+      helpers.set(SESSION_ID, session, CBOR_OPTIONS, function (err, json) {
         expect(err).to.not.exist;
         expect(json).to.have.property('__lastAccess');
         expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
