@@ -53,6 +53,14 @@ describe('helpers', function () {
     logFn: NOOP_FN,
     encrypt: true
   });
+  var ENCRYPT_WITH_KEYFUNC_OPTIONS = helpers.defaults({
+    path: FIXTURE_ENCRYPTED_SESSIONS_PATH,
+    logFn: NOOP_FN,
+    fileExtension: '.aesctrjson',
+    encrypt: true,
+    encryptEncoding: null,
+    keyFunction: function(s) { return "keep your key away from me" + s; }
+  });
   var ENCRYPT_OPTIONS_CUSTOM_ENCODING = helpers.defaults({
     path: FIXTURE_ENCRYPTED_SESSIONS_PATH,
     logFn: NOOP_FN,
@@ -382,6 +390,23 @@ describe('helpers', function () {
         expect(json).to.have.property('__lastAccess');
         expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
         done();
+      });
+
+    });
+
+    it('should creates new encrypted session file with key modified and be read (get)', function (done) {
+      var session = clone(SESSION);
+      session.__lastAccess = 0;
+      helpers.set(SESSION_ID, session, ENCRYPT_WITH_KEYFUNC_OPTIONS, function (err, json) {
+        expect(err).to.not.exist;
+        expect(json).to.have.property('__lastAccess');
+        expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
+        
+        helpers.get(SESSION_ID, ENCRYPT_WITH_KEYFUNC_OPTIONS, function (err, json) {
+          expect(err).to.not.exist;
+          expect(json).to.exist;
+          done();
+        });
       });
     });
 
