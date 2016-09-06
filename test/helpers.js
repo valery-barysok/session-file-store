@@ -328,7 +328,6 @@ describe('helpers', function () {
 
     it('should fail when valid expired session file exists with cbor', function (done) {
       helpers.get('YH7h3CPKKWJa10-xJyEDqzbM56c8xblR', CBOR_OPTIONS, function (err, json) {
-        console.log(err, json);
         expect(err).to.not.exist;
         expect(json).to.not.exist;
         done();
