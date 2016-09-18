@@ -281,8 +281,30 @@ describe('helpers', function () {
           done();
         });
       });
+    });
 
-    })
+    it('should fails with empty session file. Bad session should be deleted', function (done) {
+      var emptySessionPath = path.join(FIXTURE_SESSIONS_PATH, 'empty_session.json');
+
+      fs.writeFileSync(emptySessionPath, '');
+
+      helpers.get('empty_session', FIXTURE_SESSIONS_OPTIONS, function (err, json) {
+        expect(err)
+          .to.be.ok
+          .and.is.an('object')
+          .and.have.property('name', 'SyntaxError');
+        expect(json).to.not.exist;
+
+        fs.stat(emptySessionPath, function (err) {
+          expect(err)
+            .to.be.ok
+            .and.is.an('object')
+            .and.have.property('code', 'ENOENT');
+
+          done();
+        });
+      });
+    });
   });
 
   describe('#set', function () {
