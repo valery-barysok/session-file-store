@@ -339,7 +339,7 @@ describe('helpers', function () {
       });
     });
 
-    it('should succeeds with encrypt when valid non-exired session file exists and is encrypted with custom encoding', function (done) {
+    it('should succeeds with encrypt when valid non-expired session file exists and is encrypted with custom encoding', function (done) {
       var session = clone(SESSION);
       session.__lastAccess = 0;
       // first we create a session file in order to read a valid one later
