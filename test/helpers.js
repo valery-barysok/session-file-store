@@ -51,28 +51,28 @@ describe('helpers', function () {
   var ENCRYPT_OPTIONS = helpers.defaults({
     path: FIXTURE_ENCRYPTED_SESSIONS_PATH,
     logFn: NOOP_FN,
-    encrypt: true
+    secret: ''
   });
   var ENCRYPT_WITH_KEYFUNC_OPTIONS = helpers.defaults({
     path: FIXTURE_ENCRYPTED_SESSIONS_PATH,
     logFn: NOOP_FN,
     fileExtension: '.aesctrjson',
-    encrypt: true,
+    secret: 'keyboard cat',
     encryptEncoding: null,
-    keyFunction: function(s) { return "keep your key away from me" + s; }
+    keyFunction: function(secret, sessionId) { return "keep your key away from me" + secret + sessionId; }
   });
   var ENCRYPT_OPTIONS_CUSTOM_ENCODING = helpers.defaults({
     path: FIXTURE_ENCRYPTED_SESSIONS_PATH,
     logFn: NOOP_FN,
     fileExtension: '.aesctrjson',
-    encrypt: true,
+    secret: '',
     encryptEncoding: null
   });
   var CBOR_OPTIONS = helpers.defaults({
     path: FIXTURE_SESSIONS_PATH,
     logFn: NOOP_FN,
     fileExtension: '.cbor',
-    encrypt: false,
+    secret: null,
     encoding: null,
     encoder: cbor.encode,
     decoder: cbor.decode
@@ -94,7 +94,7 @@ describe('helpers', function () {
       expect(options).to.have.property('reapSyncFallback').that.be.a('boolean');
       expect(options).to.have.property('logFn').that.be.a('function');
       expect(options).to.have.property('fallbackSessionFn').that.be.a('undefined');
-      expect(options).to.have.property('encrypt').that.be.a('boolean');
+      expect(options).to.have.property('secret').that.be.a('undefined');
     });
 
     it('should returns provided options', function () {
@@ -110,7 +110,7 @@ describe('helpers', function () {
         reapSyncFallback: true,
         logFn: NOOP_FN,
         fallbackSessionFn: NOOP_FN,
-        encrypt: true
+        secret: 'keyboard cat'
       });
 
       expect(options).to.exist;
@@ -126,7 +126,7 @@ describe('helpers', function () {
       expect(options).to.have.property('reapSyncFallback', true);
       expect(options).to.have.property('logFn', NOOP_FN);
       expect(options).to.have.property('fallbackSessionFn', NOOP_FN);
-      expect(options).to.have.property('encrypt', true);
+      expect(options).to.have.property('secret', 'keyboard cat');
     });
   });
 
