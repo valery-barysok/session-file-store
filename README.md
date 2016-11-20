@@ -37,23 +37,23 @@ Session file store is a provision for storing session data in the session file
 ## Options
 
   - `path`               The directory where the session files will be stored. Defaults to `./sessions`
-  - `ttl`                Session time to live in seconds. Defaults to 3600
-  - `retries`            The number of retries to get session data from a session file. Defaults to 5
-  - `factor`             The exponential factor to use for retry. Defaults to 1
-  - `minTimeout`         The number of milliseconds before starting the first retry. Defaults to 50
-  - `maxTimeout`         The maximum number of milliseconds between two retries. Defaults to 100
+  - `ttl`                Session time to live in seconds. Defaults to `3600`
+  - `retries`            The number of retries to get session data from a session file. Defaults to `5`
+  - `factor`             The exponential factor to use for retry. Defaults to `1`
+  - `minTimeout`         The number of milliseconds before starting the first retry. Defaults to `50`
+  - `maxTimeout`         The maximum number of milliseconds between two retries. Defaults to `100`
   - `reapIntervalObject` [OUT] Contains intervalObject if reap was scheduled
-  - `reapInterval`       Interval to clear expired sessions in seconds or -1 if do not need. Defaults to 1 hour
-  - `reapAsync`          use distinct worker process for removing stale sessions. Defaults to false
-  - `reapSyncFallback`   reap stale sessions synchronously if can not do it asynchronously. Default to false
-  - `logFn`              log messages. Defaults to console.log
+  - `reapInterval`       Interval to clear expired sessions in seconds or -1 if do not need. Defaults to `1 hour`
+  - `reapAsync`          use distinct worker process for removing stale sessions. Defaults to `false`
+  - `reapSyncFallback`   reap stale sessions synchronously if can not do it asynchronously. Default to `false`
+  - `logFn`              log messages. Defaults to `console.log`
   - `fallbackSessionFn`  returns fallback session object after all failed retries. No defaults
   - `secret`             if secret string is specified then enables encryption of the session before writing the file and also decryption when reading it.
-  - `encryptEncoding`    Encryption output encoding. Defaults to 'hex'
-  - `encoding`           Object-to-text text encoding. Can be null. Defaults to 'utf8'
-  - `encoder`            Encoding function. Takes object, returns encoded data. Defaults to JSON.stringify
-  - `decoder`            Decoding function. Takes encoded data, returns object. Defaults to JSON.parse
-  - `fileExtension`      File extension of saved files. Defaults to '.json'
+  - `encryptEncoding`    Encryption output encoding. Defaults to `'hex'`
+  - `encoding`           Object-to-text text encoding. Can be null. Defaults to `'utf8'`
+  - `encoder`            Encoding function. Takes object, returns encoded data. Defaults to `JSON.stringify`
+  - `decoder`            Decoding function. Takes encoded data, returns object. Defaults to `JSON.parse`
+  - `fileExtension`      File extension of saved files. Defaults to `'.json'`
   - `keyFunction`        Encryption key retrieval function. Takes secret and session id, returns key. Defaults to `function(secret, sessionId){return secret + sessionId;}`
 
 ## Usage
