@@ -54,7 +54,7 @@ Session file store is a provision for storing session data in the session file
   - `encoder`            Encoding function. Takes object, returns encoded data. Defaults to JSON.stringify
   - `decoder`            Decoding function. Takes encoded data, returns object. Defaults to JSON.parse
   - `fileExtension`      File extension of saved files. Defaults to '.json'
-  - `keyFunction`        Encryption key retrieval function. Takes session id, returns key. Defaults to function(s){return s;}
+  - `keyFunction`        Encryption key retrieval function. Takes secret and session id, returns key. Defaults to function(secret, sessionId){return secret + sessionId;}
 
 ## Usage
 
