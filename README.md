@@ -15,6 +15,8 @@ Also you can use it with [Koa](http://koajs.com/)
 
 [![NPM][npm-image]][npm-url]
 
+[![Join the chat at https://gitter.im/valery-barysok/session-file-store](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/valery-barysok/session-file-store?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Session file store is a provision for storing session data in the session file
 
 ## Compatibility
