@@ -454,6 +454,47 @@ describe('helpers', function () {
     });
   });
 
+  describe('#touch', function () {
+    before(function (done) {
+      fs.emptyDir(SESSIONS_OPTIONS.path, done);
+    });
+
+    after(function (done) {
+      fs.remove(SESSIONS_OPTIONS.path, done);
+    });
+
+
+    it('should fails when no session file exists', function (done) {
+      var session = clone(SESSION);
+      helpers.touch('no_exists', session, SESSIONS_OPTIONS, function (err, json) {
+        expect(err)
+            .to.be.ok
+            .and.is.an('object')
+            .and.have.property('code', 'ENOENT');
+        expect(json).to.not.exist;
+        done();
+      });
+    });
+
+    it('should succeeds when valid session touched', function (done) {
+      var session = clone(SESSION);
+      session.__lastAccess = 0;
+      // first we create a session file in order to read a valid one later
+      helpers.set(SESSION_ID, session, SESSIONS_OPTIONS, function (err, json) {
+        expect(err).to.not.exist;
+
+        helpers.touch(SESSION_ID, session, SESSIONS_OPTIONS, function (err, json) {
+          expect(err).to.not.exist;
+          expect(json).to.be.ok;
+          expect(json).to.have.property('__lastAccess');
+          expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
+          done();
+        });
+      });
+    });
+
+  });
+  
   describe('#destroy', function () {
     var SESSION_FILE = path.join(SESSIONS_OPTIONS.path, SESSION_ID + '.json');
 
