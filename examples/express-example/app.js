@@ -4,7 +4,7 @@ var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 
 app.use(session({
-    store: new FileStore,
+    store: new FileStore({}),
     secret: 'keyboard cat',
     resave: true,
     saveUninitialized: true
