@@ -43,7 +43,6 @@ describe('store', function () {
             store.length(function (err, result) {
               expect(err)
                   .to.be.ok
-                  .and.is.an('object')
                   .and.have.property('code', 'ENOENT');
               expect(result).to.not.exist;
               done();

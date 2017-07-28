@@ -70,11 +70,11 @@
     "write-file-atomic": "^2.1.0"
   },
   "devDependencies": {
-    "chai": "^2.3.0",
+    "cbor-sync": "^1.0.2",
+    "chai": "^4.1.0",
     "coveralls": "^2.11.8",
     "istanbul": "^0.4.2",
     "lodash.clone": "^4.3.1",
-    "mocha": "^2.3.3",
-    "cbor-sync": "^1.0.2"
+    "mocha": "^3.4.2"
   }
 }

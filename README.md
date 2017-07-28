@@ -14,7 +14,7 @@ Session file store is a provision for storing session data in the session file
 ## Compatibility
 
 * Supports Express `>= 4.x` and Connect `>= 1.4.0` through [express-session][express-session-url]
-* Supports [Node.js][node-url] `>= 0.10`
+* Supports [Node.js][node-url] `>= 4`
 * Indirectly supports Koa `>= 0.9.0` through [express-session][express-session-url]
 
 ## Getting Started

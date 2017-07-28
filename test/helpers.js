@@ -157,7 +157,6 @@ describe('helpers', function () {
         helpers.length(FIXTURE_SESSIONS_NO_EXIST_OPTIONS, function (err, result) {
           expect(err)
               .to.be.ok
-              .and.is.an('object')
               .and.have.property('code', 'ENOENT');
           expect(result).to.not.exist;
           done();
@@ -204,7 +203,6 @@ describe('helpers', function () {
         helpers.list(FIXTURE_SESSIONS_NO_EXIST_OPTIONS, function (err, result) {
           expect(err)
               .to.be.ok
-              .and.is.an('object')
               .and.have.property('code', 'ENOENT');
           done();
         });
@@ -249,7 +247,6 @@ describe('helpers', function () {
       helpers.get('no_exists', FIXTURE_SESSIONS_OPTIONS, function (err, json) {
         expect(err)
             .to.be.ok
-            .and.is.an('object')
             .and.have.property('code', 'ENOENT');
         expect(json).to.not.exist;
         done();
@@ -260,7 +257,6 @@ describe('helpers', function () {
       helpers.get('2o7sOpgMqMGWem0IxddjE0DkR3-jqUPS', FIXTURE_SESSIONS_OPTIONS, function (err, json) {
         expect(err)
             .to.be.ok
-            .and.is.an('object')
             .and.have.property('code', 'ENOENT');
         expect(json).to.not.exist;
         done();
@@ -316,14 +312,12 @@ describe('helpers', function () {
       helpers.get('empty_session', FIXTURE_SESSIONS_OPTIONS, function (err, json) {
         expect(err)
           .to.be.ok
-          .and.is.an('object')
           .and.have.property('name', 'SyntaxError');
         expect(json).to.not.exist;
 
         fs.stat(emptySessionPath, function (err) {
           expect(err)
             .to.be.ok
-            .and.is.an('object')
             .and.have.property('code', 'ENOENT');
 
           done();
@@ -469,7 +463,6 @@ describe('helpers', function () {
       helpers.touch('no_exists', session, SESSIONS_OPTIONS, function (err, json) {
         expect(err)
             .to.be.ok
-            .and.is.an('object')
             .and.have.property('code', 'ENOENT');
         expect(json).to.not.exist;
         done();
@@ -525,8 +518,7 @@ describe('helpers', function () {
           expect(err)
               .to.be.ok
               .and.is.an('array')
-              .with.deep.property('[0]')
-              .that.is.an("object")
+            .with.deep.property('0')
               .and.have.property('code', 'ENOENT');
           done();
         });
