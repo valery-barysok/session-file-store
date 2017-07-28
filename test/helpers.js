@@ -93,15 +93,15 @@ describe('helpers', function () {
       expect(options).to.have.property('reapAsync').that.be.a('boolean');
       expect(options).to.have.property('reapSyncFallback').that.be.a('boolean');
       expect(options).to.have.property('logFn').that.be.a('function');
-      expect(options).to.have.property('fallbackSessionFn').that.be.a('undefined');
-      expect(options).to.have.property('secret').that.be.a('undefined');
+      expect(options).to.not.have.property('fallbackSessionFn');
+      expect(options).to.not.have.property('secret');
     });
 
     it('should returns provided options', function () {
       var options = helpers.defaults({
         path: './sessions2',
         ttl: 4000,
-        retries: 1,
+        retries: 0,
         factor: 2,
         minTimeout: 150,
         maxTimeout: 200,
@@ -116,7 +116,7 @@ describe('helpers', function () {
       expect(options).to.exist;
       expect(options).to.have.property('path', path.normalize('./sessions2'));
       expect(options).to.have.property('ttl', 4000);
-      expect(options).to.have.property('retries', 1);
+      expect(options).to.have.property('retries', 0);
       expect(options).to.have.property('factor', 2);
       expect(options).to.have.property('minTimeout', 150);
       expect(options).to.have.property('maxTimeout', 200);
