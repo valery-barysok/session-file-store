@@ -60,7 +60,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4"
   },
   "dependencies": {
     "bagpipe": "^0.3.5",
