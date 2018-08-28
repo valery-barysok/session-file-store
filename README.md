@@ -70,7 +70,7 @@ app.use(session({
 
 ## Examples
 
-You can found basic work [app examples](https://github.com/valery-barysok/session-file-store/tree/master/examples)
+You can find basic work [app examples](https://github.com/valery-barysok/session-file-store/tree/master/examples)
 for [express](https://github.com/valery-barysok/session-file-store/tree/master/examples/express-example),
 [connect](https://github.com/valery-barysok/session-file-store/tree/master/examples/connect-example) and
 [koa](https://github.com/valery-barysok/session-file-store/tree/master/examples/koa-example) frameworks in `examples` folder.
