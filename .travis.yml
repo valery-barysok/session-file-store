@@ -1,14 +1,17 @@
 language: node_js
 node_js:
   - "node"
+  - "11"
+  - "10"
+  - "9"
+  - "8"
   - "7"
   - "6"
-  - "4"
 sudo: false
 git:
   depth: 10
 branches:
   only:
     - master
-script: "npm run-script test-ci"
+script: "npm run test-ci"
 after_script: "nyc report --reporter=text-lcov | coveralls"
