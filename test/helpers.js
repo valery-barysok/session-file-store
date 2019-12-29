@@ -9,7 +9,6 @@ var cbor = require('cbor-sync');
 
 describe('helpers', function () {
   var FIXTURE_SESSIONS_PATH = path.normalize('test/fixtures/sessions');
-  var FIXTURE_ENCRYPTED_SESSIONS_PATH = path.normalize('test/fixtures/encrypted_sessions');
   var FIXTURE_SESSIONS_NO_EXIST_PATH = path.normalize('test/fixtures/sessions_no_exist');
   var SESSIONS_PATH = path.join(os.tmpdir(), 'sessions');
   var SESSION_ID = 'session_id';
@@ -49,24 +48,9 @@ describe('helpers', function () {
     }
   });
   var ENCRYPT_OPTIONS = helpers.defaults({
-    path: FIXTURE_ENCRYPTED_SESSIONS_PATH,
+    path: FIXTURE_SESSIONS_PATH,
     logFn: NOOP_FN,
-    secret: ''
-  });
-  var ENCRYPT_WITH_KEYFUNC_OPTIONS = helpers.defaults({
-    path: FIXTURE_ENCRYPTED_SESSIONS_PATH,
-    logFn: NOOP_FN,
-    fileExtension: '.aesctrjson',
-    secret: 'keyboard cat',
-    encryptEncoding: null,
-    keyFunction: function(secret, sessionId) { return "keep your key away from me" + secret + sessionId; }
-  });
-  var ENCRYPT_OPTIONS_CUSTOM_ENCODING = helpers.defaults({
-    path: FIXTURE_ENCRYPTED_SESSIONS_PATH,
-    logFn: NOOP_FN,
-    fileExtension: '.aesctrjson',
-    secret: '',
-    encryptEncoding: null
+    secret: 'squirrel'
   });
   var CBOR_OPTIONS = helpers.defaults({
     path: FIXTURE_SESSIONS_PATH,
@@ -279,31 +263,6 @@ describe('helpers', function () {
       });
     });
 
-    it('should fail with encrypt when valid expired session file exists and is encrypted', function (done) {
-      helpers.get('wHoYJ_tqdwmStiQ8ZX0KSulYqhMQ9_hH', ENCRYPT_OPTIONS, function (err, json) {
-        expect(err).to.not.exist;
-        expect(json).to.not.exist;
-        done();
-      });
-    });
-
-    it('should succeeds with encrypt when valid non-exired session file exists and is encrypted', function (done) {
-      var session = clone(SESSION);
-      session.__lastAccess = 0;
-      // first we create a session file in order to read a valid one later
-      helpers.set(SESSION_ID, session, ENCRYPT_OPTIONS, function (err, json) {
-        expect(err).to.not.exist;
-        expect(json).to.have.property('__lastAccess');
-        expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
-        // read the valid json file
-        helpers.get(SESSION_ID, ENCRYPT_OPTIONS, function (err, json) {
-          expect(err).to.not.exist;
-          expect(json).to.be.ok;
-          done();
-        });
-      });
-    });
-
     it('should fails with empty session file. Bad session should be deleted', function (done) {
       var emptySessionPath = path.join(FIXTURE_SESSIONS_PATH, 'empty_session.json');
 
@@ -320,31 +279,6 @@ describe('helpers', function () {
             .to.be.ok
             .and.have.property('code', 'ENOENT');
 
-          done();
-        });
-      });
-    });
-
-    it('should fail with encrypt when valid expired session file exists and is encrypted with custom encoding', function (done) {
-      helpers.get('wHoYJ_tqdwmStiQ8ZX0KSulYqhMQ9_hH', ENCRYPT_OPTIONS_CUSTOM_ENCODING, function (err, json) {
-        expect(err).to.not.exist;
-        expect(json).to.not.exist;
-        done();
-      });
-    });
-
-    it('should succeeds with encrypt when valid non-expired session file exists and is encrypted with custom encoding', function (done) {
-      var session = clone(SESSION);
-      session.__lastAccess = 0;
-      // first we create a session file in order to read a valid one later
-      helpers.set(SESSION_ID, session, ENCRYPT_OPTIONS_CUSTOM_ENCODING, function (err, json) {
-        expect(err).to.not.exist;
-        expect(json).to.have.property('__lastAccess');
-        expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
-        // read the valid json file
-        helpers.get(SESSION_ID, ENCRYPT_OPTIONS_CUSTOM_ENCODING, function (err, json) {
-          expect(err).to.not.exist;
-          expect(json).to.be.ok;
           done();
         });
       });
@@ -367,6 +301,21 @@ describe('helpers', function () {
         expect(json).to.have.property('__lastAccess');
         expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
         // read the valid json file
+        helpers.get(SESSION_ID, CBOR_OPTIONS, function (err, json) {
+          expect(err).to.not.exist;
+          expect(json).to.be.ok;
+          done();
+        });
+      });
+    });
+
+    it('validates encrypted session', function (done) {
+      var session = clone(SESSION);
+      session.__lastAccess = 0;
+      helpers.set(SESSION_ID, session, ENCRYPT_OPTIONS, function (err, json) {
+        expect(err).to.not.exist;
+        expect(json).to.have.property('__lastAccess');
+        expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
         helpers.get(SESSION_ID, CBOR_OPTIONS, function (err, json) {
           expect(err).to.not.exist;
           expect(json).to.be.ok;
@@ -397,49 +346,21 @@ describe('helpers', function () {
       });
     });
 
-    it('should creates new encrypted session file', function (done) {
-      var session = clone(SESSION);
-      session.__lastAccess = 0;
-      helpers.set(SESSION_ID, session, ENCRYPT_OPTIONS, function (err, json) {
-        expect(err).to.not.exist;
-        expect(json).to.have.property('__lastAccess');
-        expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
-        done();
-      });
-
-    });
-
-    it('should creates new encrypted session file with key modified and be read (get)', function (done) {
-      var session = clone(SESSION);
-      session.__lastAccess = 0;
-      helpers.set(SESSION_ID, session, ENCRYPT_WITH_KEYFUNC_OPTIONS, function (err, json) {
-        expect(err).to.not.exist;
-        expect(json).to.have.property('__lastAccess');
-        expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
-        
-        helpers.get(SESSION_ID, ENCRYPT_WITH_KEYFUNC_OPTIONS, function (err, json) {
-          expect(err).to.not.exist;
-          expect(json).to.exist;
-          done();
-        });
-      });
-    });
-
-    it('should creates new encrypted session file with custom encoding', function (done) {
-      var session = clone(SESSION);
-      session.__lastAccess = 0;
-      helpers.set(SESSION_ID, session, ENCRYPT_OPTIONS_CUSTOM_ENCODING, function (err, json) {
-        expect(err).to.not.exist;
-        expect(json).to.have.property('__lastAccess');
-        expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
-        done();
-      });
-    });
-
     it('should creates new session file with cbor', function (done) {
       var session = clone(SESSION);
       session.__lastAccess = 0;
       helpers.set(SESSION_ID, session, CBOR_OPTIONS, function (err, json) {
+        expect(err).to.not.exist;
+        expect(json).to.have.property('__lastAccess');
+        expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
+        done();
+      });
+    });
+
+    it('creates encrypted session', function (done) {
+      var session = clone(SESSION);
+      session.__lastAccess = 0;
+      helpers.set(SESSION_ID, session, ENCRYPT_OPTIONS, function (err, json) {
         expect(err).to.not.exist;
         expect(json).to.have.property('__lastAccess');
         expect(json.__lastAccess).to.not.equal(SESSION.__lastAccess);
