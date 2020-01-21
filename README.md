@@ -42,13 +42,14 @@ Session file store is a provision for storing session data in the session file
   - `reapSyncFallback`   reap stale sessions synchronously if can not do it asynchronously. Default to `false`
   - `logFn`              log messages. Defaults to `console.log`
   - `fallbackSessionFn`  returns fallback session object after all failed retries. No defaults
-  - `secret`             if secret string is specified then enables encryption of the session before writing the file and also decryption when reading it.
-  - `encryptEncoding`    Encryption output encoding. Defaults to `'hex'`
   - `encoding`           Object-to-text text encoding. Can be null. Defaults to `'utf8'`
   - `encoder`            Encoding function. Takes object, returns encoded data. Defaults to `JSON.stringify`
   - `decoder`            Decoding function. Takes encoded data, returns object. Defaults to `JSON.parse`
   - `fileExtension`      File extension of saved files. Defaults to `'.json'`
-  - `keyFunction`        Encryption key retrieval function. Takes secret and session id, returns key. Defaults to `function(secret, sessionId){return secret + sessionId;}`
+  - `secret`             Enables transparent encryption support conforming to [OWASP's Session Management](https://owasp.org/www-project-cheat-sheets/cheatsheets/Session_Management_Cheat_Sheet.html) best practices.
+  - `crypto.algorithm`   Defaults to `aes-256-gcm` but supports symmetric algorithms listed from `crypto.getCiphers()`.
+  - `crypto.hashing`     Defaults to `sha512` but supports hashing algorithms listed from `crypto.getHashes()`.
+  - `crypto.use_scrypt`  Defaults to `true`. When not supported (node < 10.5) will fall back to the `crypto.pbkdf2()` key derivation function.
 
 ## Usage
 
