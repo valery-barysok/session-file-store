@@ -369,6 +369,20 @@ describe('helpers', function () {
     });
   });
 
+  describe('#all', function () {
+    this.timeout(500);
+
+    it('should return one non-expired session', function (done) {
+      helpers.getAll(FIXTURE_SESSIONS_OPTIONS, function (err, result) {
+        expect(err).to.not.exist;
+        expect(result)
+            .to.be.ok
+            .and.have.length(1);
+        done();
+      });
+    });
+  });
+
   describe('#touch', function () {
     before(function (done) {
       fs.emptyDir(SESSIONS_OPTIONS.path, done);
