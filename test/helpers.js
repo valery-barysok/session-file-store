@@ -370,15 +370,26 @@ describe('helpers', function () {
   });
 
   describe('#all', function () {
-    this.timeout(500);
+    before(function (done) {
+      fs.emptyDir(SESSIONS_OPTIONS.path, done);
+    });
+
+    after(function (done) {
+      fs.remove(SESSIONS_OPTIONS.path, done);
+    });
 
     it('should return one non-expired session', function (done) {
-      helpers.getAll(FIXTURE_SESSIONS_OPTIONS, function (err, result) {
-        expect(err).to.not.exist;
-        expect(result)
-            .to.be.ok
-            .and.have.length(1);
-        done();
+      var session = clone(SESSION);
+      session.__lastAccess = 0;
+      helpers.set(SESSION_ID, session, SESSIONS_OPTIONS, function (err, json) {
+        helpers.getAll(FIXTURE_SESSIONS_OPTIONS, function (err, result) {
+          console.dir({err})
+          expect(err).to.not.exist;
+          expect(result)
+              .to.be.ok
+              .and.has.property(SESSION_ID);
+          done();
+        });
       });
     });
   });
