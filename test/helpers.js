@@ -369,6 +369,31 @@ describe('helpers', function () {
     });
   });
 
+  describe('#all', function () {
+    before(function (done) {
+      fs.emptyDir(SESSIONS_OPTIONS.path, done);
+    });
+
+    after(function (done) {
+      fs.remove(SESSIONS_OPTIONS.path, done);
+    });
+
+    it('should return one non-expired session', function (done) {
+      var session = clone(SESSION);
+      session.__lastAccess = 0;
+      helpers.set(SESSION_ID, session, SESSIONS_OPTIONS, function (err, json) {
+        helpers.getAll(FIXTURE_SESSIONS_OPTIONS, function (err, result) {
+          console.dir({err})
+          expect(err).to.not.exist;
+          expect(result)
+              .to.be.ok
+              .and.has.property(SESSION_ID);
+          done();
+        });
+      });
+    });
+  });
+
   describe('#touch', function () {
     before(function (done) {
       fs.emptyDir(SESSIONS_OPTIONS.path, done);
